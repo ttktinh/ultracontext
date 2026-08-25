@@ -1,16 +1,13 @@
-version: "3.8"
-
 services:
   postgres:
     image: postgres:17
     restart: unless-stopped
     environment:
       POSTGRES_USER: ultracontext
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ultracontext_change_me}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ultracontext
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      # Mount schema để auto-init (hoặc chạy migrate thủ công sau)
       - ../files/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ultracontext -d ultracontext"]
@@ -27,7 +24,7 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_PROVIDER: postgres
-      DATABASE_URL: postgresql://ultracontext:${POSTGRES_PASSWORD:-ultracontext_change_me}@postgres:5432/ultracontext
+      DATABASE_URL: postgresql://ultracontext:${POSTGRES_PASSWORD}@postgres:5432/ultracontext
       ULTRACONTEXT_ADMIN_KEY: ${ULTRACONTEXT_ADMIN_KEY}
       PORT: 8787
     depends_on:
