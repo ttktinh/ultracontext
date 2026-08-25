@@ -11,7 +11,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       # Mount schema để auto-init (hoặc chạy migrate thủ công sau)
-      - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      - ../files/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ultracontext -d ultracontext"]
       interval: 5s
