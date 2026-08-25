@@ -27,11 +27,12 @@ services:
       DATABASE_URL: postgresql://ultracontext:${POSTGRES_PASSWORD}@postgres:5432/ultracontext
       ULTRACONTEXT_ADMIN_KEY: ${ULTRACONTEXT_ADMIN_KEY}
       PORT: 8787
+      HOSTNAME: "0.0.0.0"         
     depends_on:
       postgres:
         condition: service_healthy
     expose:
-      - "8787"
+      - "8787:8787"
     networks:
       - dokploy-network
 
