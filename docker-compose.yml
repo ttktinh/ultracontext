@@ -31,7 +31,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    port:
+    ports:
       - "8787:8787"
     networks:
       - dokploy-network
